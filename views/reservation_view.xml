@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_room_reservation_form" model="ir.ui.view">
+            <field name="name">room.reservation.form</field>
+            <field name="model">room.reservation</field>
+            <field name="arch" type="xml">
+                <form string="Room Reservation">
+                    <header>
+                        <button name="action_draft" string="Draft" type="object" class="btn-success"/>
+                        <button name="action_scheduled" string="Scheduled" type="object" class="oe_highlight"/>
+                        <button name="action_running" string="Running" type="object" class="oe_highlight"/>
+                        <button name="action_ending" string="Ending" type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="customer_id"/>
+                                <field name="phone"/>
+                                <field name="email"/>
+                                <field name="address"/>
+                                <field name="id_type"/>
+                                <field name="id_number"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="duration"/>
+                                <field name="room_id"/>
+                                <field name="reservation_type"/>
+                                <field name="note"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_room_reservation_tree" model="ir.ui.view">
+            <field name="name">room.reservation.tree</field>
+            <field name="model">room.reservation</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="customer_id"/>
+                    <field name="room_id"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action for Room Reservation -->
+        <record id="room_reservation_action" model="ir.actions.act_window">
+            <field name="name">Room Reservation</field>
+            <field name="res_model">room.reservation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Room Reservation......
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+                id="reservation_root"
+                name="Reservation"
+                parent="room_root"
+                sequence="10"/>
+
+        <menuitem
+                id="reservation_root_details"
+                name="Reservation Rooms"
+                parent="reservation_root"
+                action="room_reservation_action"
+                sequence="10"/>
+
+    </data>
+</odoo>
